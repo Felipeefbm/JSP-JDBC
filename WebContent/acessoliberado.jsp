@@ -10,10 +10,13 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+	<body>
 
-<h3>seja bem vindo ao sistema jsp</h3>
+		<h3>seja bem vindo ao sistema jsp</h3>
+
+		<a href="cadastroUsuario.jsp">Cadastro de usuários </a>
 
 
-</body>
+
+	</body>
 </html> 

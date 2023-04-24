@@ -12,17 +12,17 @@
 <title>PROJETO JAVA</title>
 </head>
 <body>
-	<h1>SIGN IN</h1>
+	<h1>TELA INICIAL</h1>
 	
 
-	<form action="LoginServlet" method="post">
-		Login:	
+	<form action="LoginServlet" method="post">  
+		usuario:	
 		<input type="text" id="login" name="login">
 		<br/>
 		Senha:
 		<input type="text" id="senha" name="senha">
 		<br/>
-		<input type="submit" value="logar">
+		<input type="submit" value="login">
 		
 	</form>
 	
