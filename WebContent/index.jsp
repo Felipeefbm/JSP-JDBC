@@ -22,7 +22,7 @@
 		Senha:
 		<input type="text" id="senha" name="senha">
 		<br/>
-		<input type="submit" valuer="logar">
+		<input type="submit" value="logar">
 		
 	</form>
 	

@@ -10,5 +10,12 @@
 	<param-value>paraná</param-value>
   </context-param>
 
+  <filter>
+  	
+  	<filter-name>filter</filter-name>
+  	<filter-class>filter.Filter</filter-class>
+  	
+  </filter>
+
 
 </web-app>
