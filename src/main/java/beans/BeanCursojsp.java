@@ -1,6 +1,6 @@
 package beans;
 
-public class BeanCursojsp {
+public class BeanCursojsp {    // obs 
 	
 	private String login;
 	private String senha;
