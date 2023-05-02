@@ -34,7 +34,8 @@ public class DaoUsuario {
 			e.printStackTrace();
 			try {
 				connection.rollback();
-			}catch(SQLException e1) {
+			}
+			catch(SQLException e1) {
 				e1.printStackTrace();
 			}
 		}
@@ -51,12 +52,69 @@ public class DaoUsuario {
 		while(resultSet.next()) {
 			
 			BeanCursojsp beanCursoJsp = new BeanCursojsp();
+			beanCursoJsp.setId(resultSet.getLong("id"));
 			beanCursoJsp.setLogin(resultSet.getString("login"));
 			beanCursoJsp.setSenha(resultSet.getString("senha"));
 			
 			listar.add(beanCursoJsp);
 		}
 		return listar;
+	}
+	
+	public void delete (String login) {
+		
+		try {
+		String sql = "delete from usuario where login = '" + login + "'";
+		PreparedStatement prepareStatement = connection.prepareStatement(sql);
+		prepareStatement.execute();
+		
+		connection.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			}
+			catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	public BeanCursojsp consultar(String login)throws Exception {
+		String sql = "select * from usuario where login='" + login + "'";
+		
+		PreparedStatement prepareStatement = connection.prepareStatement(sql);
+		ResultSet resultSet = prepareStatement.executeQuery();
+		if(resultSet.next()) {
+			BeanCursojsp beanCursoJsp = new BeanCursojsp();
+			beanCursoJsp.setId(resultSet.getLong("id"));
+			beanCursoJsp.setLogin(resultSet.getString("login"));
+			beanCursoJsp.setSenha(resultSet.getString("senha"));
+			
+			return beanCursoJsp;
+		}
+		
+		return null;
+	}
+
+	public void atualizar(BeanCursojsp usuario) throws SQLException {
+		try {
+			String sql = "update usuario set login= ?, senha = ? where id = " + usuario.getId();
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, usuario.getLogin());
+			preparedStatement.setString(2, usuario.getSenha());
+			preparedStatement.executeUpdate();
+			connection.commit();
+		} 
+		catch(Exception e) {
+			e.printStackTrace();
+			connection.rollback();
+			
+		}
+		
+			
+
 	}
 
 }
