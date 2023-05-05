@@ -1,31 +1,35 @@
-	<jsp:useBean id="calcula" class="beans.BeanCursojsp" type="beans.BeanCursojsp" scope="page"/>	
-	
-	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    	pageEncoding="ISO-8859-1"%>
-    
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-  
+
+<jsp:useBean id="calcula" class="beans.BeanCursojsp"
+	type="beans.BeanCursojsp" scope="page" />
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>PROJETO JAVA</title>
+
+<link rel="stylesheet" href="resources/css/estilo.css">
+
 </head>
 <body>
-	<h1>TELA INICIAL</h1>
-	
 
-	<form action="LoginServlet" method="post">  
-		usuario:	
-		<input type="text" id="login" name="login">
-		<br/>
-		Senha:
-		<input type="password" id="senha" name="senha">
-		<br/>
-		<input type="submit" value="login">
-		
-	</form>
-	
-	
+	<div class="login">
+		<h1>Login</h1>
+		<form action="LoginServlet" method="post">
+			<input type="text" name="login" placeholder="Username"
+				required="required" /> <input type="password" name="senha"
+				placeholder="Password" required="required" />
+
+			<button type="submit" value="login"
+				class="btn btn-primary btn-block btn-large">Let me in.</button>
+		</form>
+	</div>
+
+
 </body>
 </html>
