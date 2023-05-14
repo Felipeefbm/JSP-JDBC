@@ -12,10 +12,10 @@
 <body>
 
 
-	<h1>Cadastro de usuário</h1>
+	<center> <h1>Cadastro de usuário</h1> </center>
 
-	<form action="salvarUsuario" method="post">
-	<ul class="form-style-1">
+	<form action="salvarUsuario" method="post" id="formUser">
+		<ul class="form-style-1">
 			<li>
 				<table>
 					<tr>
@@ -23,44 +23,61 @@
 						<td><input type="text" readonly="readonly" id="id" name="id"
 							value="${user.id}" classe="field-long"></td>
 					</tr>
+					
 					<tr>
 						<td>Login:</td>
-						<td><input type="text" id="login" name="login"
-							value="${user.login}"></td>
+						<td><input type="text" id="login" name="login" value="${user.login}"></td>
 					</tr>
 
 					<tr>
 						<td>Senha:</td>
-						<td><input type="password" id="senha" name="senha"
-							value="${user.senha}"></td>
+						<td><input type="password" id="senha" name="senha" value="${user.senha}"></td>
 					</tr>
-				</table> <input type="submit" value="Salvar">
+					
+					<tr>
+						<td>Nome:</td>
+						<td> <input type="text" id="nome" name="nome" value="${user.nome}"></td>
+					</tr>
+					
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Salvar"> <input type="submit" value="Cancelar" onclick="document.getElementById('formUser').action = 'salvarUsuario?acao=reset'" ></td>
+					</tr>
+					
+				</table> 
 			</li>
-	</ul>
+		</ul>
 	</form>
 
-
-	<table>
-
-		<c:forEach items="${usuarios}" var="user">
-			<tr>
-				<td style="width: 150px"><c:out value="${user.id}"></c:out></td>
-
-				<td style="width: 150px"><c:out value="${user.login}"></c:out>
-				</td>
-
-				<td><c:out value="${user.senha}"></c:out></td>
-
-				<td><a href="salvarUsuario?acao=delete&user=${user.login}">Excluir</a>
-				</td>
-				<td><a href="salvarUsuario?acao=editar&user=${user.login}">Editar</a>
-				</td>
-
-
-			</tr>
-		</c:forEach>
-
-	</table>
+	<div class="container">
+		<div class="container align-columns">
+			<table class="responsive-table">
+				<caption>Usuários cadastrados</caption>
+				<tr>
+					<th>Id</th>
+					<th>Login</th>
+					<th>Nome</th>
+					<th>Delete</th>
+					<th>Editar</th>
+				</tr>
+				<c:forEach items="${usuarios}" var="user">  <!-- recebe a injeção de dados pela classe Usuario  -->
+					<tr>
+						<td class="align-column"><c:out value="${user.id}"></c:out></td>
+						<td class="align-column"><c:out value="${user.login}"></c:out></td>
+						<td class="align-column"><c:out value="${user.nome}"></c:out></td>
+						
+						
+						<td><a href="salvarUsuario?acao=delete&user=${user.id}"><img src="resources/img/excluir.jpg" alt="excluir" 
+						title="Excluir" width="50px" height="50px"> </a></td>
+						
+						<td><a href="salvarUsuario?acao=editar&user=${user.id}"><img alt="Editar" 
+						title="Editar" src="resources/img/editar.jpg" width="50px" height="50px"> </a></td>
+						
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
 
 </body>
 </html>

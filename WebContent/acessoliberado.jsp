@@ -1,9 +1,11 @@
- 	<jsp:useBean id="calcula" class="beans.BeanCursojsp" type="beans.BeanCursojsp" scope="page"/>
 
-	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    	pageEncoding="ISO-8859-1"%>
-    	
-    	
+<jsp:useBean id="calcula" class="beans.BeanCursojsp"
+	type="beans.BeanCursojsp" scope="page" />
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +16,9 @@
 
 		<h3>seja bem vindo ao sistema jsp</h3>
 
-		<a href="cadastroUsuario.jsp">Cadastro de usuários </a>
+		<a href="salvarUsuario?acao=listartodos">Usuários cadastrados </a>
 
 
 
 	</body>
-</html> 
+</html>

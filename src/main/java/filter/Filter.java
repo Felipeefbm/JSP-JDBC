@@ -13,26 +13,26 @@ import javax.servlet.annotation.WebFilter;
 
 import connection.SingleConnection;
 
-@WebFilter(urlPatterns= {"/*"})
-public class Filter implements javax.servlet.Filter{
-	
+@WebFilter(urlPatterns = { "/*" })
+public class Filter implements javax.servlet.Filter {
+
 	private static Connection connection;
-	
+
 	@Override
 	public void destroy() {
-		
+
 	}
 
 	@Override
-	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)  // filtra as telas
+	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) // filtra as telas
 			throws IOException, ServletException {
 		try {
 			arg2.doFilter(arg0, arg1);
-			
+
 			connection.commit();
 		}
-		
-		catch(Exception e) {
+
+		catch (Exception e) {
 			try {
 				e.printStackTrace();
 				connection.rollback();
@@ -43,7 +43,7 @@ public class Filter implements javax.servlet.Filter{
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {   
+	public void init(FilterConfig arg0) throws ServletException {
 		connection = SingleConnection.getConnection();
 	}
 
