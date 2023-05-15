@@ -21,10 +21,11 @@
 	<div class="login">
 		<h1>Login</h1>					 <!-- post vai "cair" no metodo doPost de LoginServlet-->
 		<form action="LoginServlet" method="post">   <!-- LoginServlet é a classe que está gerenciando os dados recebidos pelo index -->
+			
 			<input type="text" name="login" placeholder="Username"
 				required="required" /> <input type="password" name="senha"
 				placeholder="Password" required="required" />
-
+				
 			<button type="submit" value="login"
 				class="btn btn-primary btn-block btn-large">Let me in.</button>
 		</form>

@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-image: url('fundu.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh; /* definir a altura como 100% da altura da janela de exibição */
+  overflow: hidden; /* ocultar qualquer espaço em branco abaixo da imagem */
+}
+
+

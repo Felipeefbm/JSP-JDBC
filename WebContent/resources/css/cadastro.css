@@ -2,6 +2,11 @@
 
 @import "bourbon@5.*";
 
+.button-cell {
+  display: grid;
+  place-items: center;
+}
+
 .form-style-1 {
 	margin: 10px auto;
 	max-width: 400px;

@@ -79,6 +79,7 @@ public class Usuario extends HttpServlet { // classe para trafegar os dados na r
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
+			String fone = request.getParameter("fone");
 
 			BeanCursojsp usuario = new BeanCursojsp();
 			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0); // criando um novo usuario com uma instância da
@@ -87,20 +88,23 @@ public class Usuario extends HttpServlet { // classe para trafegar os dados na r
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
+			usuario.setFone(fone);
 
 			try {
+				
+				if(id == null || id.isEmpty()&& !daoUsuario.validarLogin(login)) {
+					request.setAttribute("msg", "Usuário já existe com o mesmo login!");
+				}
 
-				if (id == null || id.isEmpty()) { // se id existir atualiza, se nao, salva novo usuario
+				if (id == null || id.isEmpty()                   // se id existir atualiza, se nao, salva novo usuario
+						&& daoUsuario.validarLogin(login)) {        // valida e depois salva
+					
 					daoUsuario.salvar(usuario);
-				} else {
+
+				} else if (id != null && !id.isEmpty()) {
 					daoUsuario.atualizar(usuario);
 				}
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			try {
 				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
 				request.setAttribute("usuarios", daoUsuario.listar());
 				view.forward(request, response);
