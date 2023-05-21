@@ -7,9 +7,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>cadastro de usuário</title>
-<link rel="stylesheet" href="resources/css/cadastro.css">
+<link rel="stylesheet" href="resources/css/cadastroUsuario.css">
 </head>
 <body>
+<a href="acessoliberado.jsp">Inicío</a>
+<a href="index.jsp">Sair</a>
 
 
 	<center>
@@ -20,12 +22,13 @@
 		<ul class="form-style-1">
 			<li>
 				<table>
+				
 					<tr>
 						<td>Código:</td>
 						<td><input type="text" readonly="readonly" id="id" name="id"
-							value="${user.id}" classe="field-long"></td>
+							value="${user.id}"></td>
 					</tr>
-
+					
 					<tr>
 						<td>Login:</td>
 						<td><input type="text" id="login" name="login"

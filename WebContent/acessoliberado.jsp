@@ -16,9 +16,13 @@
 <body>
 
 				
-	<h1>SEJA BEM VINDO AO SISTEMA!</h1>
+	<h3>Seja bem vindo ao sistema de cadastro!</h3>
 	<a href="salvarUsuario?acao=listartodos"><img alt="Cadastro de usuario" 
 	title="Cadastro de usuario" src="resources/img/usuario.png" width="100px" height="100px"> </a>
+	
+	<a href="salvarProduto?acao=listartodos"><img alt="Cadastro de produto" 
+	title="Cadastro de produto" src="resources/img/product.png" width="100px" height="100px"> </a>
+				
 				
 		
 		

@@ -1,6 +1,5 @@
 package servlet;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,15 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.BeanCursojsp;
+import beans.BeanProduto;
 import dao.DaoProduto;
-
 
 @WebServlet("/salvarProduto")
 public class ProdutoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
 
 	private DaoProduto daoProduto = new DaoProduto();
 
@@ -31,28 +28,25 @@ public class ProdutoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			String acao = request.getParameter("acao");
-			String user = request.getParameter("user");
+			String product = request.getParameter("product");
+			
+			RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
 
 			if (acao.equalsIgnoreCase("delete")) {
-				daoProduto.delete(user);
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("produtos", daoProduto.read());
-				view.forward(request, response);
+				daoProduto.delete(product);
+				request.setAttribute("produtos", daoProduto.list());
+				
+			} else if (acao.equalsIgnoreCase("editar")) {
+				BeanProduto beanProduto = daoProduto.consult(product);
+				request.setAttribute("product", beanProduto);
 
-			} else if (acao.equalsIgnoreCase("update")) {
-				BeanCursojsp beanCursoJsp = daoProduto.consultar(user);
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("user", beanCursoJsp);
-				view.forward(request, response);
-
-			} else if (acao.equalsIgnoreCase("listartodos")) { // quando a requisição for feita pela tela de cadastro de
-																// usuario. Liste todos os usuarios
-				RequestDispatcher view = request // redireciona a pagina para a tela de cadastroUsuariojsp
-						.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar()); // vai injetar toda a lista de usuarios que está
-																		// dentro do banco de dados
-				view.forward(request, response); // na tabela usuarios do cadastroUsuario.jsp
+			} else if (acao.equalsIgnoreCase("listartodos")) {
+				request.setAttribute("produtos", daoProduto.list()); 
 			}
+			
+			request.setAttribute("categorias", daoProduto.listaCategorias());
+			view.forward(request, response);
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,8 +61,8 @@ public class ProdutoServlet extends HttpServlet {
 
 		if (acao != null && acao.equalsIgnoreCase("reset")) {
 			try {
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar());
+				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
+				request.setAttribute("produtos", daoProduto.list());
 				view.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -77,37 +71,35 @@ public class ProdutoServlet extends HttpServlet {
 		} else {
 
 			String id = request.getParameter("id"); // dados que estao vindo da tela pelo botao "salvar"
-			String login = request.getParameter("login");
-			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
-			String fone = request.getParameter("fone");
+			String quantidade = request.getParameter("quantidade");
+			String valor = request.getParameter("valor");
+			String categoria = request.getParameter("categoria_id");
 
-			BeanCursojsp usuario = new BeanCursojsp();
-			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0); // criando um novo usuario com uma instância da
-																	// classe Bean e salvando os dados recebidos pelo
-																	// submit do front
-			usuario.setLogin(login);
-			usuario.setSenha(senha);
-			usuario.setNome(nome);
-			usuario.setFone(fone);
+
+			BeanProduto produto = new BeanProduto();
+			produto.setId(!id.isEmpty() ? Long.parseLong(id) : 0); 
+			produto.setNome(nome);
+			produto.setQuantidade(quantidade);
+			produto.setValor(valor);
+			produto.setCategoria_id(Long.parseLong(categoria));
 
 			try {
-				
-				if(id == null || id.isEmpty()&& !daoUsuario.validarLogin(login)) {
-					request.setAttribute("msg", "Usuário já existe com o mesmo login!");
+
+				if (id == null || id.isEmpty() && !daoProduto.validarProduto(nome)) {
+					request.setAttribute("msg", "produto já foi inserido!");
 				}
 
-				if (id == null || id.isEmpty()                   // se id existir atualiza, se nao, salva novo usuario
-						&& daoUsuario.validarLogin(login)) {        // valida e depois salva
-					
-					daoUsuario.salvar(usuario);
+				if (id == null || id.isEmpty() && daoProduto.validarProduto(nome)) { 
+					daoProduto.create(produto);
 
 				} else if (id != null && !id.isEmpty()) {
-					daoUsuario.atualizar(usuario);
+					daoProduto.update(produto);
 				}
 
-				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar());
+				RequestDispatcher view = request.getRequestDispatcher("/cadastroProduto.jsp");
+				request.setAttribute("produtos", daoProduto.list());
+				request.setAttribute("categorias", daoProduto.listaCategorias());
 				view.forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -115,11 +107,5 @@ public class ProdutoServlet extends HttpServlet {
 		}
 
 	}
-
-}
-	
-	
-	
-	
 
 }

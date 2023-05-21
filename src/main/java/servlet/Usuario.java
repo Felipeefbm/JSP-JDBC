@@ -92,7 +92,7 @@ public class Usuario extends HttpServlet { // classe para trafegar os dados na r
 
 			try {
 				
-				if(id == null || id.isEmpty()&& !daoUsuario.validarLogin(login)) {
+				if(id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
 					request.setAttribute("msg", "Usuário já existe com o mesmo login!");
 				}
 
