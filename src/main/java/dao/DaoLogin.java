@@ -16,13 +16,13 @@ public class DaoLogin {
 
 	public boolean validarLogin(String login, String senha) throws Exception {
 
-		String sql = "select * from usuario where login =  '" + login + "' and senha = '" + senha + "' "; // pesquisa
-		PreparedStatement statement = connection.prepareStatement(sql); // instrução pro banco
-		ResultSet resultSet = statement.executeQuery(); // objeto da pesquisa
-		if (resultSet.next()) { // existe usuario?
-			return true; // possui usuario
+		String sql = "select * from usuario where login =  '" + login + "' and senha = '" + senha + "' "; 
+		PreparedStatement statement = connection.prepareStatement(sql); 
+		ResultSet resultSet = statement.executeQuery(); 
+		if (resultSet.next()) { 
+			return true; 
 		} else {
-			return false; // usuario nao existe no banco
+			return false; 
 		}
 	}
 

@@ -19,8 +19,8 @@
 <body>
 
 	<div class="login">
-		<h1>Login</h1>					 <!-- post vai "cair" no metodo doPost de LoginServlet-->
-		<form action="LoginServlet" method="post">   <!-- LoginServlet é a classe que está gerenciando os dados recebidos pelo index -->
+		<h1>Login</h1>					 
+		<form action="LoginServlet" method="post">   
 			
 			<input type="text" name="login" placeholder="Username"
 				required="required" /> <input type="password" name="senha"

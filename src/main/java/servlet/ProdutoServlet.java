@@ -70,7 +70,7 @@ public class ProdutoServlet extends HttpServlet {
 
 		} else {
 
-			String id = request.getParameter("id"); // dados que estao vindo da tela pelo botao "salvar"
+			String id = request.getParameter("id"); 
 			String nome = request.getParameter("nome");
 			String quantidade = request.getParameter("quantidade");
 			String valor = request.getParameter("valor");

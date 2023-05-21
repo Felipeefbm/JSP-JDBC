@@ -1,8 +1,6 @@
 package beans;
 
-public class BeanCursojsp { // classe para trafegar os dados na rede (front, backend) recebe os dados da
-							// tela de cadastro pela servelet Usuario
-							// e criando um novo usuario/objeto e salvando no banco de dados
+public class BeanCursojsp { 
 
 	private Long id;
 	private String login;

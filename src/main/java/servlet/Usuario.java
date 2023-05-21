@@ -13,10 +13,7 @@ import beans.BeanCursojsp;
 import dao.DaoUsuario;
 
 @WebServlet("/salvarUsuario")
-public class Usuario extends HttpServlet { // classe para trafegar os dados na rede (front, backend), recebe os dados da
-											// tela de cadastro,
-											// salvando-os em um novo objeto da classe Bean e guardando no banco de
-											// dados.
+public class Usuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private DaoUsuario daoUsuario = new DaoUsuario();
@@ -44,13 +41,10 @@ public class Usuario extends HttpServlet { // classe para trafegar os dados na r
 				request.setAttribute("user", beanCursoJsp);
 				view.forward(request, response);
 
-			} else if (acao.equalsIgnoreCase("listartodos")) { // quando a requisição for feita pela tela de cadastro de
-																// usuario. Liste todos os usuarios
-				RequestDispatcher view = request // redireciona a pagina para a tela de cadastroUsuariojsp
-						.getRequestDispatcher("/cadastroUsuario.jsp");
-				request.setAttribute("usuarios", daoUsuario.listar()); // vai injetar toda a lista de usuarios que está
-																		// dentro do banco de dados
-				view.forward(request, response); // na tabela usuarios do cadastroUsuario.jsp
+			} else if (acao.equalsIgnoreCase("listartodos")) {
+				RequestDispatcher view = request.getRequestDispatcher("/cadastroUsuario.jsp");
+				request.setAttribute("usuarios", daoUsuario.listar());
+				view.forward(request, response);
 			}
 
 		} catch (Exception e) {
@@ -75,30 +69,28 @@ public class Usuario extends HttpServlet { // classe para trafegar os dados na r
 
 		} else {
 
-			String id = request.getParameter("id"); // dados que estao vindo da tela pelo botao "salvar"
+			String id = request.getParameter("id"); 
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String nome = request.getParameter("nome");
 			String fone = request.getParameter("fone");
 
 			BeanCursojsp usuario = new BeanCursojsp();
-			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0); // criando um novo usuario com uma instância da
-																	// classe Bean e salvando os dados recebidos pelo
-																	// submit do front
+			usuario.setId(!id.isEmpty() ? Long.parseLong(id) : 0); 
 			usuario.setLogin(login);
 			usuario.setSenha(senha);
 			usuario.setNome(nome);
 			usuario.setFone(fone);
 
 			try {
-				
-				if(id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
+
+				if (id == null || id.isEmpty() && !daoUsuario.validarLogin(login)) {
 					request.setAttribute("msg", "Usuário já existe com o mesmo login!");
 				}
 
-				if (id == null || id.isEmpty()                   // se id existir atualiza, se nao, salva novo usuario
-						&& daoUsuario.validarLogin(login)) {        // valida e depois salva
-					
+				if (id == null || id.isEmpty() 
+						&& daoUsuario.validarLogin(login)) { 
+
 					daoUsuario.salvar(usuario);
 
 				} else if (id != null && !id.isEmpty()) {

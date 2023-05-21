@@ -18,11 +18,10 @@ public class DaoUsuario {
 		connection = SingleConnection.getConnection();
 	}
 
-	public void salvar(BeanCursojsp usuario) throws Exception {  // criando objetos da classe BeanCursos com o metodo de encapsulamento SET
-
+	public void salvar(BeanCursojsp usuario) throws Exception { 
 		try {
 
-			String sql = "insert into usuario(login, senha, nome, fone) values (?, ?, ?, ?)"; // cadastrando novo usuario
+			String sql = "insert into usuario(login, senha, nome, fone) values (?, ?, ?, ?)"; 
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, usuario.getLogin());                       
 			insert.setString(2, usuario.getSenha());

@@ -16,8 +16,7 @@ import dao.DaoLogin;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private DaoLogin daoLogin = new DaoLogin(); // instância de DaoLogin
-
+	private DaoLogin daoLogin = new DaoLogin(); 
 	public LoginServlet() {
 		super();
 	}
@@ -37,8 +36,7 @@ public class LoginServlet extends HttpServlet {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 
-			if (daoLogin.validarLogin(login, senha)) { // recebe o login e senha do front e manda requisição pro backend
-														// fazer a pesquisa
+			if (daoLogin.validarLogin(login, senha)) { 
 				RequestDispatcher dispatcher = request.getRequestDispatcher("acessoliberado.jsp");
 				dispatcher.forward(request, response);
 			} else {
