@@ -11,7 +11,7 @@ import beans.BeanCategoria;
 import beans.BeanProduto;
 import connection.SingleConnection;
 
-public class DaoProduto {
+public class DaoProduto implements IProdutoDAO {  
 
 	private Connection connection;
 
@@ -20,7 +20,7 @@ public class DaoProduto {
 	}
 	
   
-	
+    @Override
 	public void create(BeanProduto produto) throws Exception {
 		try {
 			String sql = "insert into produto (nome, quantidade, valor, categoria_id) values (?, ?, ?, ?)";  
@@ -43,7 +43,7 @@ public class DaoProduto {
 
 	}
 
-	
+    @Override
 	public List <BeanProduto> list() throws Exception {
 		
 		List <BeanProduto> listar = new ArrayList<BeanProduto>();
@@ -68,6 +68,7 @@ public class DaoProduto {
 		
 	}
 	
+    @Override
 	public List <BeanCategoria> listaCategorias()throws Exception{
 		
 		List <BeanCategoria> retorno = new ArrayList<BeanCategoria>();
@@ -84,6 +85,7 @@ public class DaoProduto {
 		return retorno;
 	}
 	
+    @Override
 	public void update(BeanProduto produto) throws SQLException {
 		try {
 			String sql = "update produto set nome = ?, quantidade = ?, valor = ?, categoria_id = ?  where id = " + produto.getId(); 
@@ -106,7 +108,7 @@ public class DaoProduto {
 	
 	
 	
-	
+    @Override
 	public void delete (String id) {
 		try {
 			String sql = "delete from produto where id  = '" + id + "'";
@@ -125,6 +127,7 @@ public class DaoProduto {
 		
 	}
 	
+    @Override
 	public BeanProduto consult (String id) throws Exception {
 		String sql = "select * from produto where id='" + id + "'"; 
 
@@ -146,6 +149,7 @@ public class DaoProduto {
 		return null;
 	}
 	
+    @Override
 	public boolean validarProduto(String nome) throws Exception {
 		String sql = "select count(1) as qtd from produto where nome='" + nome + "'"; 
 

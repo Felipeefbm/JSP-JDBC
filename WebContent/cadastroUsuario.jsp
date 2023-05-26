@@ -81,7 +81,7 @@
 
 				</tr>
 				<c:forEach items="${usuarios}" var="user">
-					<!-- recebe a injeção de dados pela classe Usuario  -->
+					
 					<tr>
 						<td class="align-column"><c:out value="${user.id}"></c:out></td>
 						<td class="align-column"><c:out value="${user.login}"></c:out></td>
